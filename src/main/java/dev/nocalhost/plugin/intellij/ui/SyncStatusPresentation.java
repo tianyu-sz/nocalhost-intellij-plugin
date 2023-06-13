@@ -120,7 +120,7 @@ public class SyncStatusPresentation implements StatusBarWidget.MultipleTextValue
                             .syncPublisher(NocalhostSyncUpdateNotifier.NOCALHOST_SYNC_UPDATE_NOTIFIER_TOPIC)
                             .action(results);
 
-                    Thread.sleep(3000);
+                    Thread.sleep(30 * 1000);
                 } catch (Exception ex) {
                     LOG.error("Failed to refresh service list: [" + json + "]", ex);
                 }
