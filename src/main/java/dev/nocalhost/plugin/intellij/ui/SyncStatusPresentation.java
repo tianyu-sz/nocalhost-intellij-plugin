@@ -47,6 +47,7 @@ import icons.NocalhostIcons;
 public class SyncStatusPresentation implements StatusBarWidget.MultipleTextValuesPresentation, StatusBarWidget.Multiframe {
 
     private static final Logger LOG = Logger.getInstance(SyncStatusPresentation.class);
+    public static final int NOCALHOST_SYNC_COMMAND_INTERVAL_MILLIS = 300 * 1000;
 
     private final StatusBar statusBar;
     private final Project project;
@@ -92,7 +93,7 @@ public class SyncStatusPresentation implements StatusBarWidget.MultipleTextValue
             while ( ! project.isDisposed()) {
                 try {
                     nhctlSyncStatus.set(getNhctlSyncStatus());
-                    Thread.sleep(3000);
+                    Thread.sleep(NOCALHOST_SYNC_COMMAND_INTERVAL_MILLIS);
                 } catch (Exception ex) {
                     LOG.error("Failed to get sync status", ex);
                 }
@@ -120,7 +121,7 @@ public class SyncStatusPresentation implements StatusBarWidget.MultipleTextValue
                             .syncPublisher(NocalhostSyncUpdateNotifier.NOCALHOST_SYNC_UPDATE_NOTIFIER_TOPIC)
                             .action(results);
 
-                    Thread.sleep(30 * 1000);
+                    Thread.sleep(NOCALHOST_SYNC_COMMAND_INTERVAL_MILLIS);
                 } catch (Exception ex) {
                     LOG.error("Failed to refresh service list: [" + json + "]", ex);
                 }
